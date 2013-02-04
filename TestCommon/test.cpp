@@ -11,6 +11,7 @@
 #include "testdaemon.h"
 #include "select.h"
 #include "epoll.h"
+#include "testtime.h"
 #include <vector>
 
 void
@@ -39,6 +40,7 @@ dummy_function()
     *ptr               = 0x00;
 }
 
+
 int
 main(int argc, char *argv[])
 {
@@ -58,6 +60,10 @@ main(int argc, char *argv[])
     if(strcmp(argv[1], "base") == 0)
     {
         TestBase();
+    }
+    else if(strcmp(argv[1], "time") == 0)
+    {
+        TestTime();
     }
     else if(strcmp(argv[1],"socket") == 0)
     {
