@@ -42,8 +42,8 @@ int TestSyncBlock(int nport)
      n = read(newsockfd,buffer,255);
      if (n < 0)
          err_sys("ERROR reading from socket");
-     printf("Here is the message: %s\n",buffer);
-     n = write(newsockfd,"I got your message",18);
+     printf("Server:Here is client message: %s\n",buffer);
+     n = write(newsockfd,"message from server",19);
      if (n < 0)
          err_sys("ERROR writing to socket");
      close(newsockfd);
@@ -66,7 +66,7 @@ int TestSyncBlockClient(int nport)
         err_sys("error connect socket");
     while(1)
     {
-        char* pMsg = "Client To Server";
+        char* pMsg = "message from client";
         int n = write(sockfd, pMsg, strlen(pMsg));
         if(n < 0)
             err_sys("write socket error");
@@ -75,7 +75,8 @@ int TestSyncBlockClient(int nport)
         n = read(sockfd, buf, 255);
         if(n<0)
             err_sys("read socket error");
-        printf("Here is the mssage%s\n", buf);
+        printf("Msg Size:%d\n",n);
+        printf("Client:Here is server message: %s\n", buf);
     }
     close(sockfd);
     return 0;

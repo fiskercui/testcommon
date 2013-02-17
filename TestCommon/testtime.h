@@ -7,7 +7,7 @@ void
 TimeAlarm(int sigal)
 {
     static int nCount = 0;
-    printf("test alarm: %dd\n", nCount++);
+    printf("test alarm: %d\n", nCount++);
     alarm(5);
 }
 
