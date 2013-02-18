@@ -16,8 +16,42 @@ protected:
     Command(){    }
 };
 
+class Document
+{
+public:
+    Document(): m_user(NULL){
 
-class Application;
+    }
+    Document(const char* name){
+        m_user = strdup(name);
+    }
+    void Open(){
+        printf("Open\n");
+    }
+
+    void Close(){
+        printf("close\n");
+    }
+
+    void Cut(){
+        printf("cut\n");
+    }
+    void Paste(){
+        printf("paste\n");
+    }
+
+private:
+    char* m_user;
+};
+
+class Application
+{
+public:
+    void Add(Document*){
+        printf("Add Document\n");
+    }
+private:
+};
 class OpenCommand: public Command
 {
 public:
@@ -45,19 +79,19 @@ void OpenCommand::Excute()
     const char* name = AskUser();
     if(name != NULL)
     {
-
+        Document* pDoc = new Document(name);
+        m_app->Add(pDoc);
+        pDoc->Open();
     }
-
 }
 
 const char* OpenCommand::AskUser()
 {
-    return NULL;
+    return "123";
 }
 
 
 
-class Document;
 class PasteCommand:public Command
 {
 public:
@@ -80,7 +114,8 @@ PasteCommand::~PasteCommand(){
 
 void PasteCommand::Excute()
 {
-
+    if(m_doc != NULL)
+        m_doc->Paste();
 }
 
 template<class Receiver>
@@ -181,10 +216,17 @@ void MacroCommand::Excute()
 
 int main(int argc, char *argv[])
 {
+    Application* pApp = new Application;
+    Command* pCmd = new OpenCommand(pApp);
+    pCmd->Excute();
+
+
+    Document* pDoc = new Document;
+    Command* pCommand = new PasteCommand(pDoc);
+    pCommand->Excute();
+
     MyClass* receiver = new MyClass;
-
     Command* aCommand = new SimpleCommand<MyClass>(receiver, &MyClass::Action);
-
     aCommand->Excute();
     return 0;
 }

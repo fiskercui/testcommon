@@ -189,6 +189,9 @@ BooleanExp* OrExp::Copy() const
 
 
 // (true and x ) or (y and (not x ))
+
+//ontly cimpile design
+
 int main(int argc, char *argv[])
 {
     Context context;
