@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <vector>
 #include <algorithm>
+#include <string.h>
+
 class Command
 {
 public:
