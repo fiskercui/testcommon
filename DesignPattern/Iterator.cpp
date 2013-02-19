@@ -93,7 +93,28 @@ private:
 };
 
 template <typename Item>
-ListTraveller<Item>::ListTraveller(List<Item>* aList)
+ListTraveller<Item>::ListTraveller(List<Item>* aList):m_aList(aList)
 {
+}
 
+template <typename Item>
+bool ListTraveller<Item>::Traverse()
+{
+    bool ret = false;
+
+    for(m_iterator.First(); m_iterator.End(); m_iterator.Next())
+    {
+        ret = ProcessItem(m_iterator.CurItem());
+        if(ret == false)
+            break;
+    }
+    return ret;
+}
+
+
+template <typename Item>
+bool ListTraveller<Item>::ProcessItem(const Item&)
+{
+    printf("process Item\n");
+    return true;
 }
