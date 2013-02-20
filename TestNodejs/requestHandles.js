@@ -59,7 +59,7 @@ function upload(response, request)
         fs.renameSync(files.upload.path, "/home/fisker/test.png");
         response.writeHead(200, {"Content-Type": "text/html"});
         response.write("received image:<br/>");
-        response.write("<img src = '/show'/>");
+        response.write("<img src='/show'/>");
         response.end();
     });
 }
